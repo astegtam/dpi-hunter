@@ -96,35 +96,6 @@ Or download it as ZIP from the green "Code" button on GitHub and extract it.
 
 ---
 
-## Building
-
-1. Download WinDivert 2.x and extract it to C:\WinDivert\.
-
-2. Open "Dpi Hunter.sln" in Visual Studio.
-
-3. Add include/library paths (Project Properties):
-   - C/C++ -> General -> Additional Include Directories: C:\WinDivert\include
-   - Linker -> General -> Additional Library Directories: C:\WinDivert\lib
-
-4. Build:
-   - Configuration: Release
-   - Platform: x64
-   - Build -> Build Solution
-
-5. After building, copy these files from WinDivert into the same folder as Dpi Hunter.exe:
-
-   WinDivert.dll
-   WinDivert64.sys
-
-6. Run Dpi Hunter.exe as administrator.
-
-The program will:
-   - Ask for your language (first run only)
-   - Auto-detect your network's DPI behavior
-   - Start protecting your traffic
-
----
-
 ## Usage
 
 ### Basic
