@@ -4,13 +4,21 @@ An adaptive Deep Packet Inspection (DPI) circumvention tool for Windows, written
 
 ---
 
-## Overview
+## About
 
-DPI Hunter is a lightweight network tool that helps bypass Deep Packet Inspection (DPI) systems used by ISPs and governments to block, throttle, or monitor internet traffic.
+DPI Hunter is a lightweight network utility that helps bypass Deep Packet Inspection (DPI) systems used by ISPs and governments to block, throttle, or monitor internet traffic.
 
 It automatically detects which bypass strategy works on your network, applies it in real time, and switches on the fly if the connection starts failing — without breaking existing connections or requiring manual configuration.
 
 Just double-click and it runs.
+
+---
+
+## Purpose
+
+This project was built for **personal privacy and security research**. It is intended to help users protect their own traffic from invasive inspection in regions where internet access is restricted or monitored.
+
+It is not designed to attack, exploit, or damage any network or system.
 
 ---
 
@@ -237,19 +245,23 @@ Roadmap: IPv6 support, system tray icon, service installation, per-domain traffi
 - The driver is signed by the WinDivert project — verify the signature before use.
 - DPI Hunter does not phone home, log traffic, or send telemetry anywhere.
 - The source is fully open — audit it yourself.
+- No data is collected, stored, or transmitted by this program.
 
 ---
 
 ## Disclaimer
 
-This software is provided for educational and research purposes and to protect personal privacy in regions with restrictive internet policies.
+This software is provided for **educational and research purposes only**, and to help users protect their personal privacy in regions with restrictive internet policies.
 
-The author is not responsible for:
+The author **does not take any responsibility** for:
 - Any misuse of this tool
-- Any legal consequences of using it
-- Any network or system damage
+- Any legal consequences resulting from its use
+- Any network, system, or data damage caused directly or indirectly
+- Any violation of local, national, or international laws
 
-Use at your own risk. Always comply with local laws.
+This tool does not attack, exploit, or harm any network or system. It only modifies the user's own outbound traffic before it leaves their machine.
+
+**Use at your own risk.** You are solely responsible for how you use this software. Always comply with the laws of your country.
 
 ---
 
