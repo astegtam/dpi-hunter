@@ -1,7 +1,3 @@
-Kusura bakma, haklısın. Markdown kod bloğunun çitlerini (`````) ham metin olarak gösterdiğimde dışarıdaki blokla çakıştığı için parçalanmış görünmüş.
-
-Aşağıdaki alanı **sağ üst köşesindeki Kopyala (Copy) butonuna** basarak tek seferde eksiksiz kopyalayabilirsin:
-
 ```markdown
 # DPI Hunter
 
