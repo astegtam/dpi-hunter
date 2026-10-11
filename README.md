@@ -1,115 +1,95 @@
 # DPI Hunter
 
-**An adaptive DPI circumvention tool for Windows.**
+A small Windows tool that helps you get around DPI (Deep Packet Inspection) based website blocking. It works like GoodbyeDPI: it uses [WinDivert](https://reqrypt.org/windivert.html) to change your outgoing TLS handshakes so that the DPI system can no longer read the host name (SNI) and block the connection.
 
-DPI Hunter is a lightweight Windows utility designed to help users maintain access to websites and online services affected by Deep Packet Inspection (DPI) filtering.
-
-It automatically tests different traffic-handling strategies, selects a suitable one for your network, and adapts when connection problems occur. The goal is to make the process as simple as possible, without requiring users to configure everything manually.
+By astegtam. Current version: **v2.1**
 
 ## Features
 
-- **Automatic Strategy Detection** — Tests multiple traffic-handling strategies and selects one that works best in your network environment.
-- **Adaptive Switching** — Re-evaluates strategies when connection issues are detected.
-- **TLS SNI Fragmentation** — Splits TLS handshake data to help bypass certain types of DPI filtering.
-- **Fake Packet Injection** — Uses decoy packets with modified TTL or sequence information to interfere with some DPI inspection methods.
-- **QUIC Blocking** — Blocks QUIC traffic on UDP port 443, allowing compatible applications to fall back to TCP-based connections.
-- **Domain Blacklist** — Applies circumvention selectively to specified domains.
-- **Live Statistics** — Displays packet activity, fragmentation, blocked QUIC traffic, detected resets, and the active strategy.
-- **Bilingual Interface** — Supports English and Turkish.
-- **Simple Configuration** — Remembers your language preference and requires minimal manual setup.
+- 10 bypass strategies (packet splitting and fake packets) plus a Safe-Mode
+- Automatic strategy selection: the tool tests your sites and switches only when a site is really blocked
+- Optional blacklist: only the sites in your list are touched
+- QUIC blocking so browsers fall back to TCP+TLS (which this tool can bypass)
+- Turkish and English interface
 
-## How to Use
+## Requirements
 
-### 1. Download and Start
+- Windows 10 / 11 (64-bit)
+- Administrator rights (the tool restarts itself as admin if needed)
+- WinDivert 2.2.x files next to `dpi_hunter.exe`:
+  - `WinDivert.dll`
+  - `WinDivert64.sys`
 
-Download the latest release from the [GitHub Releases](https://github.com/astegtam/dpi-hunter/releases) page, if a release is available.
+`WinDivert.dll`, `WinDivert64.sys` and `windivert.h` must come from the same WinDivert version.
 
-Extract the downloaded files and follow the included instructions. DPI Hunter requires Windows x64, administrator privileges, and the required WinDivert files.
+## Usage
 
-Run `Dpi Hunter.exe` as administrator.
+1. Put `dpi_hunter.exe`, `WinDivert.dll` and `WinDivert64.sys` in the same folder.
+2. Run `dpi_hunter.exe`. On the first start you choose a language. The choice is saved in `dpi_hunter.cfg`; delete that file to choose again.
+3. Leave the window open while you browse. Press `Ctrl+C` (or close the window) to stop.
 
-### 2. Select Your Language
+Command line options:
 
-On the first launch, select your preferred language:
-
-- `1` — Turkish
-- `2` — English
-
-Your selection is saved automatically.
-
-You can also launch the program with a language argument:
-
-- `--lang=tr` — Turkish
-- `--lang=en` — English
-
-### 3. Let It Find a Suitable Strategy
-
-DPI Hunter automatically tests supported strategies against HTTPS endpoints and selects a suitable strategy for your network.
-
-Keep the program running while browsing. It must remain active for its traffic-handling features to work.
-
-### 4. Configure Specific Domains (Optional)
-
-Create a file named `blacklist.txt` in the same directory as the executable.
-
-Add one domain per line:
-
-```text
-# Example domains
-youtube.com
-discord.com
-twitter.com
-roblox.com
+```
+dpi_hunter.exe --lang=tr
+dpi_hunter.exe --lang=en
 ```
 
-Lines beginning with `#` are ignored.
+### Blacklist (optional)
 
-When a blacklist is present, the program is intended to apply its circumvention techniques only to matching domains. Without a blacklist, it attempts to process all supported TLS traffic.
+Create a text file named `blacklist.txt` (`listem.txt` and `list.txt` also work) next to the exe. One domain per line, `#` starts a comment:
 
-**Note:** Domain matching and traffic handling depend on the implementation. Subdomains and applications using different connection methods may not behave as expected.
+```
+# example
+discord.com
+youtube.com
+```
 
-### 5. Monitor Activity
+- An entry also matches its subdomains (`discord.com` matches `cdn.discord.com`).
+- With a blacklist, only these sites are modified and the automatic tests use them.
+- Without a blacklist, all TLS traffic is protected.
 
-DPI Hunter displays live statistics in its console, including processed packets, fragmented packets, injected decoys, blocked QUIC traffic, detected resets, and the currently active strategy.
+## Strategies
 
-If a strategy does not work on your network, restart the program to trigger a new round of testing.
+| Name | What it does |
+|---|---|
+| SNI-Frag-1 / SNI-Frag-2 / SNI-Frag-Before | Splits the ClientHello packet inside or right before the host name |
+| Frag-At-1 / Frag-At-2 / Frag-At-3 | Splits the ClientHello at a fixed byte (Frag-At-2 is the default, like GoodbyeDPI `-e 2`) |
+| Fake-TTL-3 / Fake-TTL-6 | Sends a fake ClientHello with a harmless host name that expires before it reaches the server |
+| Fake-TTL-3-WrongSEQ | Same as above, with a wrong sequence number |
+| Fake-BadChecksum | Fake ClientHello with a broken TCP checksum |
+| Safe-Mode | Does nothing (passthrough) |
 
-To stop DPI Hunter, use `Ctrl+C` in its console or close the process.
+## How the automatic mode works
 
-## Important Notes
+- About 8 seconds after start, and then every 5 minutes, the tool opens a TLS connection to a few sites and checks that the server answers.
+- DNS or connection errors are ignored. Only "connected but the handshake was blocked" counts as DPI blocking.
+- If a round fails, the tool tries the other strategies and keeps the first one that works. If none works, the old strategy stays.
+- After 3 failed rounds in a row the tool enters Safe-Mode for 10 minutes and then tries again.
+- If 3 connection resets arrive within 15 seconds, a recovery check starts immediately.
 
-- DPI Hunter supports IPv4 traffic only.
-- QUIC is blocked by default, which may affect applications that rely on HTTP/3.
-- Some websites or applications may not work correctly with every strategy.
-- DPI circumvention is not guaranteed. Results depend on your ISP, network configuration, and filtering methods.
-- Administrator privileges are required because the program uses the WinDivert network driver.
+## Tips
 
-## Security and Privacy
+- Some blocks are done with DNS as well (for example Discord in some countries). This tool does not change DNS. Turn on encrypted DNS (DNS over HTTPS) in Windows, for example with 1.1.1.1 or 8.8.8.8.
+- If the tool does not start, the error code and a short reason are printed. Common causes: not running as admin, missing `WinDivert64.sys`, or mismatched WinDivert file versions.
 
-DPI Hunter was developed for **personal privacy protection, security research, and educational purposes**.
+## Limitations
 
-Its purpose is to help users deal with restrictive network filtering on their own devices and connections. It is not intended to attack, exploit, or damage other systems.
+- IPv4 only
+- Only TLS on port 443 (and QUIC on UDP 443) is handled
+- DNS is not redirected or encrypted by this tool
 
-The project is open source, allowing users to inspect the code and understand how traffic is handled. However, users should review the source code and verify the integrity of downloaded files before running the program, especially because it requires administrator privileges and uses a kernel-mode driver.
+## Build
 
-Use DPI Hunter only on devices and networks you are authorized to use, and comply with applicable laws and network policies.
-
-**Use at your own risk.** The software is provided without warranties. The author is not responsible for misuse, service disruptions, data loss, or other consequences resulting from its use.
-
-## Contributing
-
-Suggestions, bug reports, improvements, and pull requests are welcome.
-
-If you have ideas for new strategies, better compatibility, performance improvements, or other useful features, contributions are appreciated.
-
-Feel free to open an issue or submit a pull request on GitHub. If you would like to help improve DPI Hunter, your feedback and contributions are welcome.
+1. Visual Studio, C++ desktop development, target **x64**.
+2. Add the WinDivert `include` folder (for `windivert.h`) and the `x64` library folder (for `WinDivert.lib`) to the project.
+3. Build `dpi_hunter.cpp`. The libraries `WinDivert.lib` and `ws2_32.lib` are linked by `#pragma comment`.
+4. Copy `WinDivert.dll` and `WinDivert64.sys` next to the built exe.
 
 ## Contact
 
-**Author:** [@astegtam](https://github.com/astegtam)
+Questions, bug reports or ideas: contact **astegtam** on Discord.
 
-For questions, bug reports, feature requests, or general feedback, feel free to contact **astegtam on Discord**.
+## Disclaimer
 
-## License
-
-This project is released under the MIT License. See the `LICENSE` file for details.
+This project is for educational purposes. Laws about circumventing network restrictions differ between countries. You are responsible for how you use it. Use at your own risk.
