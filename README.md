@@ -20,8 +20,6 @@ By astegtam. Current version: **v2.1**
   - `WinDivert.dll`
   - `WinDivert64.sys`
 
-`WinDivert.dll`, `WinDivert64.sys` and `windivert.h` must come from the same WinDivert version.
-
 ## Usage
 
 1. Put `dpi_hunter.exe`, `WinDivert.dll` and `WinDivert64.sys` in the same folder.
