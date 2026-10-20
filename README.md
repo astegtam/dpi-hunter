@@ -8,17 +8,6 @@ Built with **MSVC (x64)** and the **WinDivert 2.2 API**, DPI Hunter combines mul
 
 The project is intended for technical experimentation, network research, and educational purposes, particularly in environments where internet access is restricted or certain services are difficult to reach.
 
-> ** A message to users in restricted-network environments**
->
-> If you're using DPI Hunter in Türkiye, Iran, Russia, or another country where internet access is restricted, your feedback would genuinely mean a lot to me.
->
-> Real-world testing across different ISPs, networks, and censorship systems is extremely valuable for an open-source project like this. Hearing that someone on the other side of the world tried the project, investigated a problem, or helped improve it would make me incredibly happy. 
->
-> **Found a bug? Something doesn't work on your network? Have an idea for improvement? Your feedback matters. 📩 Discord: `astegtam`**
->
-> Open source is about people sharing their experience, learning from one another, and making tools better together. Every useful report helps the project grow.
-
----
 
 ##  Features
 
@@ -283,7 +272,7 @@ If you are publishing this project as open source, make sure the chosen license 
 
 ---
 
-## 💬 Community & Feedback — Get in Touch!
+##  Community & Feedback — Get in Touch!
 
 **I would genuinely love to hear from you.**
 
@@ -301,4 +290,4 @@ The possibility that someone from a completely different part of the world tries
 
 **Don't hesitate to reach out.** Whether you want to report a bug, suggest a feature, discuss compatibility, or simply tell me about your experience using DPI Hunter, you're welcome to get in touch.
 
-Let's learn from each other's experiences and make the project better, together. 🌍🤝
+Let's learn from each other's experiences and make the project better, together. 
