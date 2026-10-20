@@ -1,6 +1,6 @@
-# 🎯 DPI Hunter v5.1
+#  DPI Hunter v5.1
 
-### 🛡️ An Open-Source DPI Circumvention Tool for Windows
+###  An Open-Source DPI Circumvention Tool for Windows
 
 **DPI Hunter** is a Windows-based network utility written in C++ that explores different techniques for handling Deep Packet Inspection (DPI), SNI filtering, and DNS-based restrictions.
 
@@ -8,7 +8,7 @@ Built with **MSVC (x64)** and the **WinDivert 2.2 API**, DPI Hunter combines mul
 
 The project is intended for technical experimentation, network research, and educational purposes, particularly in environments where internet access is restricted or certain services are difficult to reach.
 
-> **🌍 A message to users in restricted-network environments**
+> ** A message to users in restricted-network environments**
 >
 > If you're using DPI Hunter in Türkiye, Iran, Russia, or another country where internet access is restricted, your feedback would genuinely mean a lot to me.
 >
@@ -20,9 +20,9 @@ The project is intended for technical experimentation, network research, and edu
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔬 Multiple DPI Circumvention Strategies
+###  Multiple DPI Circumvention Strategies
 
 DPI Hunter includes **16+ strategy variations** designed to experiment with different approaches to DPI interference and traffic filtering.
 
@@ -36,7 +36,7 @@ Examples include:
 
 Different networks may respond differently to each strategy. No individual strategy is guaranteed to work everywhere.
 
-### 🤖 Automatic Strategy Selection & Recovery
+###  Automatic Strategy Selection & Recovery
 
 DPI Hunter includes an automated recovery mechanism designed to reduce the need for manual configuration.
 
@@ -50,7 +50,7 @@ Depending on the implementation and network conditions, it can:
 
 **Important:** Automatic detection is not infallible. A failed connection may have causes unrelated to DPI, and a strategy that works today may stop working after network or ISP changes.
 
-### 🔐 Encrypted DNS over HTTPS (DoH)
+###  Encrypted DNS over HTTPS (DoH)
 
 DPI Hunter integrates **DNS over HTTPS (DoH)** to help protect DNS queries from conventional DNS-based interference.
 
@@ -63,7 +63,7 @@ Features include:
 
 The fastest provider may vary depending on location, routing, congestion, and provider availability. DoH alone does not guarantee access to every blocked domain or service.
 
-### 🌐 IPv4 & IPv6 Support
+###  IPv4 & IPv6 Support
 
 The project is designed to support both major IP protocol versions:
 
@@ -72,7 +72,7 @@ The project is designed to support both major IP protocol versions:
 
 Actual behavior depends on the active network, the selected strategy, and the relevant system configuration.
 
-### ⚡ QUIC Handling
+###  QUIC Handling
 
 DPI Hunter includes an option to block **QUIC traffic over UDP port 443**.
 
@@ -80,7 +80,7 @@ This is intended to encourage compatible browsers and services to fall back to T
 
 Fallback behavior depends on the browser, server, network, and application. Blocking QUIC may affect connectivity or performance for some services.
 
-### 📊 User Interface & Logging
+###  User Interface & Logging
 
 DPI Hunter provides a menu-driven interface designed to make its main functions accessible without requiring users to manually configure every parameter.
 
@@ -88,7 +88,7 @@ It also includes detailed logging to help with troubleshooting, strategy evaluat
 
 ---
 
-## 🖥️ Technical Details
+##  Technical Details
 
 | Component | Details |
 |---|---|
@@ -105,7 +105,7 @@ It also includes detailed logging to help with troubleshooting, strategy evaluat
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### 1. Download the application
 
@@ -158,7 +158,7 @@ Disabling Memory Integrity can reduce protection against certain kernel-level th
 
 ---
 
-## 🎮 Usage Guide
+##  Usage Guide
 
 On startup, DPI Hunter presents a menu with several operating modes.
 
@@ -185,7 +185,7 @@ The exact options available may depend on the release and current implementation
 
 ---
 
-## ⚠️ Antivirus Warnings & False Positives
+##  Antivirus Warnings & False Positives
 
 Applications that intercept network traffic or load packet-filtering drivers may be flagged by security products.
 
@@ -207,7 +207,7 @@ The project author cannot guarantee that every release, dependency, or third-par
 
 ---
 
-## ⚖️ Disclaimer & Limitation of Liability
+##  Disclaimer & Limitation of Liability
 
 DPI Hunter is provided **for educational, research, and network troubleshooting purposes**. Its purpose is to explore and evaluate techniques for handling DPI-related interference and network restrictions.
 
@@ -227,7 +227,7 @@ If you do not understand the risks or are not comfortable with the required perm
 
 ---
 
-## 🧪 Testing & Feedback
+##  Testing & Feedback
 
 Network filtering systems differ between countries, ISPs, connection types, and even individual access points. As a result, meaningful feedback from different environments is especially valuable.
 
@@ -246,7 +246,7 @@ Reports about failed connections are useful too. Knowing where a strategy does n
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions from the open-source community are welcome.
 
@@ -265,7 +265,7 @@ Please check the repository's contribution guidelines, if available, before subm
 
 ---
 
-## 📌 Project Status
+##  Project Status
 
 DPI Hunter is an actively testable network utility, and its effectiveness may vary across systems and network environments.
 
@@ -275,7 +275,7 @@ Your testing and feedback can help identify bugs, uncover compatibility problems
 
 ---
 
-## 📜 License
+##  License
 
 See the repository's `LICENSE` file for the applicable license terms.
 
@@ -295,7 +295,7 @@ Did it work for you? Did it fail? Did you discover a strange behavior, an ISP-sp
 
 The possibility that someone from a completely different part of the world tries this project and shares their experience is one of the things that makes open source special. **That kind of feedback would genuinely make me incredibly happy.**
 
-### 🚀 Found a bug? Want to share your results? Have an idea?
+###  Found a bug? Want to share your results? Have an idea?
 
 # **📩 Discord: `astegtam`**
 
